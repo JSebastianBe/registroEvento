@@ -44,13 +44,14 @@ public class ManejaArchivo {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime ahora = LocalDateTime.now();
             String fechaHoraFormateada = ahora.format(formatter);
+            Thread.sleep(100);
             escritor.write(fechaHoraFormateada + " -> " + this.mensaje + System.lineSeparator());
             this.respuesta = "Mensaje guardado";
             escritor.close();
 
-        }catch (IOException ie){
+        }catch (Exception e){
             this.error = true;
-            this.respuesta = "Ocurrió un error en la escritura de la base de datos: " + ie.getMessage();
+            this.respuesta = "Ocurrió un error en la escritura de la base de datos: " + e.getMessage();
         }
 
 
