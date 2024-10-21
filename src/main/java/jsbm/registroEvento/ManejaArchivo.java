@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 public class ManejaArchivo {
 
@@ -45,8 +46,16 @@ public class ManejaArchivo {
             LocalDateTime ahora = LocalDateTime.now();
             String fechaHoraFormateada = ahora.format(formatter);
             Thread.sleep(100);
-            escritor.write(fechaHoraFormateada + " -> " + this.mensaje + System.lineSeparator());
-            this.respuesta = "Mensaje guardado";
+            Random random = new Random();
+            int num = random.nextInt(5);
+            if(num != 0){
+                escritor.write(fechaHoraFormateada + " -> " + this.mensaje + System.lineSeparator());
+                this.respuesta = "Mensaje guardado";
+                this.error = false;
+            }else{
+                throw new DBException();
+            }
+
             escritor.close();
 
         }catch (Exception e){
